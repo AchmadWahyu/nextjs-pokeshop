@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Image from 'next/image';
 
 export async function getServerSideProps({ params }) {
@@ -24,62 +25,76 @@ export default function PokemonDetailPage({ pokemon }) {
     return TYPES_MAP[randomInt];
   };
   return (
-    <div className="card-container">
-      <div className={`card w-96 bg-base-100 shadow-xl m-auto`}>
-        <figure className={`px-10 pt-10`}>
-          <Image
-            src={pokemon.sprites.front_default || pokemon.sprites.front_femalie}
-            alt={pokemon.name}
-            height={200}
-            width={200}
-          />
-        </figure>
-        
+    <div className="container">
+      <Head>
+        <title className="capitalize">{`${pokemon.name} detail and stats`}</title>
+        <meta
+          name={pokemon.name}
+          content={`Pokemon ${pokemon.name} detail and stats`}
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-        <div className="card-body items-center text-center">
-          <h2 classNames="card-title">{pokemon.name}</h2>
+      <main className="card-container">
+        <div className={`card w-96 bg-base-100 shadow-xl m-auto`}>
+          <figure className={`px-10 pt-10`}>
+            <Image
+              src={
+                pokemon.sprites.front_default || pokemon.sprites.front_femalie
+              }
+              alt={pokemon.name}
+              height={200}
+              width={200}
+            />
+          </figure>
 
-          <section className="flex flex-row">
-            <div className="stat-container">
-              <div className="stat">
-                <div className="stat-title">Height</div>
-                <div className="stat-value">{pokemon.height}</div>
-                <div className="stat-desc">Lbs</div>
-              </div>
+          <div className="card-body items-center text-center">
+            <h2 className="card-title capitalize font-bold text-lg">
+              {pokemon.name}
+            </h2>
 
-              <div className="stat">
-                <div className="stat-title">Weight</div>
-                <div className="stat-value">{pokemon.weight}</div>
-                <div className="stat-desc">Lbs</div>
-              </div>
-            </div>
+            <section className="flex flex-row">
+              <div className="stat-container">
+                <div className="stat">
+                  <div className="stat-title">Height</div>
+                  <div className="stat-value">{pokemon.height}</div>
+                  <div className="stat-desc">Lbs</div>
+                </div>
 
-            <div className="stat-container">
-              <div className="base-exp mt-4">
-                <h2 className="mb-1">Base Exp</h2>
-                <div
-                  className="radial-progress text-primary"
-                  style={{ '--value': baseExperiencePercent }}
-                >
-                  {baseExperiencePercent}%
+                <div className="stat">
+                  <div className="stat-title">Weight</div>
+                  <div className="stat-value">{pokemon.weight}</div>
+                  <div className="stat-desc">Lbs</div>
                 </div>
               </div>
 
-              <div className="pokemon-type mt-8">
-                <h2 className="mb-1">Types</h2>
-                {pokemon.types.map((type) => (
+              <div className="stat-container">
+                <div className="base-exp mt-4">
+                  <h2 className="mb-1">Base Exp</h2>
                   <div
-                    key={type.slot}
-                    className={`badge badge-${randomBadge()} badge-outline mr-1`}
+                    className="radial-progress text-primary"
+                    style={{ '--value': baseExperiencePercent }}
                   >
-                    {type.type.name}
+                    {baseExperiencePercent}%
                   </div>
-                ))}
+                </div>
+
+                <div className="pokemon-type mt-8">
+                  <h2 className="mb-1">Types</h2>
+                  {pokemon.types.map((type) => (
+                    <div
+                      key={type.slot}
+                      className={`badge badge-${randomBadge()} badge-outline mr-1`}
+                    >
+                      {type.type.name}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
