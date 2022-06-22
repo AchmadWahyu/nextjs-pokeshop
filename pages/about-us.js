@@ -27,8 +27,12 @@ export default function AboutUs({ data }) {
       </Head>
 
       <main>
-        <h2 className="text-center">{title}</h2>
-        <p className="text-center">{description}</p>
+        <h2 className="text-center font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400">
+          {title}
+        </h2>
+        <p className="text-center font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400">
+          {description}
+        </p>
         {teams.map((contributor) => (
           <div
             className="card w-96 bg-base-100 shadow-xl mx-auto my-4"
