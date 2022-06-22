@@ -8,7 +8,7 @@ export default function PokeCard(props) {
 
   return (
     <Link href={`/pokemon/${pokemonId}`}>
-      <div className="card w-80 bg-base-100 shadow-xl image-full m-4">
+      <div className="card w-80 bg-base-100 shadow-xl image-full m-4 cursor-pointer">
         <figure>
           <Image
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`}
